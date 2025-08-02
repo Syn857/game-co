@@ -43,11 +43,15 @@ export default function Admin() {
     }
   }, [isAuthenticated, subscribeToParticipants]);
 
-  const loadParticipants = () => {
+  const loadParticipants = async () => {
     // This function is kept for manual refresh if needed
     setIsLoading(true);
-    const data = getParticipants();
-    setParticipants(data);
+    try {
+      const data = await getParticipants();
+      setParticipants(data);
+    } catch (error) {
+      console.error('Error loading participants:', error);
+    }
     setIsLoading(false);
   };
 

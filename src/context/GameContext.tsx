@@ -11,7 +11,7 @@ interface GameContextType {
   previousQuestion: () => void;
   completeGame: () => Promise<void>;
   resetGame: () => void;
-  getParticipants: () => Participant[];
+  getParticipants: () => Promise<Participant[]>;
   subscribeToParticipants: (callback: (participants: Participant[]) => void) => () => void;
 }
 
@@ -87,10 +87,13 @@ export function GameProvider({ children }: { children: ReactNode }) {
         completedAt: new Date().toISOString()
       };
       
-      await addDoc(collection(db, 'participants'), participant);
+      console.log('Attempting to save participant to Firebase:', participant);
+      const docRef = await addDoc(collection(db, 'participants'), participant);
+      console.log('Successfully saved participant to Firebase with ID:', docRef.id);
       dispatch({ type: 'COMPLETE_GAME' });
     } catch (error) {
-      console.error('Error saving participant data:', error);
+      console.error('Error saving participant data to Firebase:', error);
+      console.log('Falling back to localStorage');
       // Fallback to localStorage if Firebase fails
       const existingParticipants = JSON.parse(localStorage.getItem('farewell-game-participants') || '[]');
       const updatedParticipants = [...existingParticipants, {
@@ -107,23 +110,38 @@ export function GameProvider({ children }: { children: ReactNode }) {
     dispatch({ type: 'RESET_GAME' });
   };
 
-  const getParticipants = (): Participant[] => {
-    // This function is kept for backward compatibility
-    // Real-time data should be accessed through subscribeToParticipants
-    return JSON.parse(localStorage.getItem('farewell-game-participants') || '[]');
-  };
-
-  const subscribeToParticipants = (callback: (participants: Participant[]) => void) => {
-    const q = query(collection(db, 'participants'), orderBy('completedAt', 'desc'));
-    
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+  const getParticipants = async (): Promise<Participant[]> => {
+    try {
+      const q = query(collection(db, 'participants'), orderBy('completedAt', 'desc'));
+      const querySnapshot = await getDocs(q);
       const participants: Participant[] = [];
       querySnapshot.forEach((doc) => {
         participants.push(doc.data() as Participant);
       });
+      return participants;
+    } catch (error) {
+      console.error('Error fetching participants from Firebase:', error);
+      // Fallback to localStorage only if Firebase fails
+      return JSON.parse(localStorage.getItem('farewell-game-participants') || '[]');
+    }
+  };
+
+  const subscribeToParticipants = (callback: (participants: Participant[]) => void) => {
+    console.log('Setting up Firebase subscription for participants');
+    const q = query(collection(db, 'participants'), orderBy('completedAt', 'desc'));
+    
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      console.log('Firebase subscription triggered, documents count:', querySnapshot.size);
+      const participants: Participant[] = [];
+      querySnapshot.forEach((doc) => {
+        console.log('Document data:', doc.data());
+        participants.push(doc.data() as Participant);
+      });
+      console.log('Calling callback with participants:', participants.length);
       callback(participants);
     }, (error) => {
-      console.error('Error fetching participants:', error);
+      console.error('Error in Firebase subscription:', error);
+      console.log('Falling back to localStorage for subscription');
       // Fallback to localStorage on error
       const localParticipants = JSON.parse(localStorage.getItem('farewell-game-participants') || '[]');
       callback(localParticipants);
