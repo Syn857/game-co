@@ -77,5 +77,5 @@ export const questions: Question[] = [
   }
 ];
 
-export const CIRCUIT_OVERSEER_NAME = 'Brother Johnson'; // This can be customized
+export const CIRCUIT_OVERSEER_NAME = 'Brother Desmond'; // This can be customized
 export const ADMIN_PASSWORD = 'farewell2024'; // This should be changed for production
