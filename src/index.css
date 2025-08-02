@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: #F7FAFC;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.card {
+  @apply bg-white rounded-custom shadow-lg p-6 border border-gray-100;
+}
+
+.btn-primary {
+  @apply bg-primary-blue text-white px-6 py-3 rounded-custom font-medium hover:bg-blue-700 transition-colors duration-200 shadow-md;
+}
+
+.btn-secondary {
+  @apply bg-primary-gold text-white px-6 py-3 rounded-custom font-medium hover:bg-yellow-600 transition-colors duration-200 shadow-md;
+}
+
+.input-field {
+  @apply w-full px-4 py-3 border border-gray-300 rounded-custom focus:outline-none focus:ring-2 focus:ring-primary-blue focus:border-transparent;
+}
