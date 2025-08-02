@@ -4,7 +4,7 @@ export const questions: Question[] = [
   {
     id: 1,
     type: 'multiple-choice',
-    question: "What's Brother [Name]'s favorite way to start his talks?",
+    question: "What's [Name]'s favorite way to start his talks?",
     options: [
       'With a warm smile and greeting',
       'With an interesting illustration',
@@ -15,17 +15,17 @@ export const questions: Question[] = [
   {
     id: 2,
     type: 'short-answer',
-    question: "What's the most memorable piece of advice Brother [Name] has shared with our congregation?"
+    question: "What's the most memorable piece of advice [Name] has shared with our congregation?"
   },
   {
     id: 3,
     type: 'creative-response',
-    question: "If Brother [Name] were a Bible character, who would he be and why?"
+    question: "If [Name] were a Bible character, who would he be and why?"
   },
   {
     id: 4,
     type: 'multiple-choice',
-    question: "What's Brother [Name]'s go-to scripture for encouragement?",
+    question: "What's [Name]'s go-to scripture for encouragement?",
     options: [
       'Philippians 4:13',
       'Isaiah 41:10',
@@ -36,12 +36,12 @@ export const questions: Question[] = [
   {
     id: 5,
     type: 'short-answer',
-    question: "What's your favorite memory from one of Brother [Name]'s visits?"
+    question: "What's your favorite memory from one of [Name]'s visits?"
   },
   {
     id: 6,
     type: 'multiple-choice',
-    question: "How would you describe Brother [Name]'s speaking style?",
+    question: "How would you describe [Name]'s speaking style?",
     options: [
       'Gentle and encouraging',
       'Enthusiastic and energetic',
@@ -52,17 +52,17 @@ export const questions: Question[] = [
   {
     id: 7,
     type: 'creative-response',
-    question: "Complete this sentence: 'Brother [Name] always reminds us that...'"
+    question: "Complete this sentence: '[Name] always reminds us that...'"
   },
   {
     id: 8,
     type: 'short-answer',
-    question: "What quality of Brother [Name] would you most like to develop in yourself?"
+    question: "What quality of [Name] would you most like to develop in yourself?"
   },
   {
     id: 9,
     type: 'multiple-choice',
-    question: "What's Brother [Name]'s favorite part of circuit work?",
+    question: "What's [Name]'s favorite part of circuit work?",
     options: [
       'Meeting new friends',
       'Encouraging the brothers and sisters',
@@ -73,7 +73,7 @@ export const questions: Question[] = [
   {
     id: 10,
     type: 'creative-response',
-    question: "What message would you like to leave for Brother [Name] as he moves to his new assignment?"
+    question: "What message would you like to leave for [Name] as he moves to his new assignment?"
   }
 ];
 
