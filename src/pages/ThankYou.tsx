@@ -23,9 +23,17 @@ export default function ThankYou() {
       setTotalParticipants(participants.length);
     });
     
-    // Fallback to localStorage count
-    const localParticipants = getParticipants();
-    setTotalParticipants(localParticipants.length);
+    // Fallback to get initial count
+    const loadInitialCount = async () => {
+      try {
+        const participants = await getParticipants();
+        setTotalParticipants(participants.length);
+      } catch (error) {
+        console.error('Error loading initial participant count:', error);
+      }
+    };
+    
+    loadInitialCount();
     
     return () => {
       unsubscribe();
