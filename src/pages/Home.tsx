@@ -21,25 +21,24 @@ export default function Home() {
   };
 
   const currentUrl = window.location.href;
-+
-+  // Subscribe to real-time participant count
-+  useEffect(() => {
-+    const unsubscribe = subscribeToParticipants((participants) => {
-+      setTotalParticipants(participants.length);
-+    });
-+
-+    // Fallback to initial fetch
-+    (async () => {
-+      try {
-+        const participants = await getParticipants();
-+        setTotalParticipants(participants.length);
-+      } catch (error) {
-+        console.error('Error loading participant count:', error);
-+      }
-+    })();
-+
-+    return () => unsubscribe();
-+  }, [subscribeToParticipants, getParticipants]);
+  // Subscribe to real-time participant count
+  useEffect(() => {
+    const unsubscribe = subscribeToParticipants((participants) => {
+      setTotalParticipants(participants.length);
+    });
+
+    // Fallback to initial fetch
+    (async () => {
+      try {
+        const participants = await getParticipants();
+        setTotalParticipants(participants.length);
+      } catch (error) {
+        console.error('Error loading participant count:', error);
+      }
+    })();
+
+    return () => unsubscribe();
+  }, [subscribeToParticipants, getParticipants]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-gold-50">
@@ -102,16 +101,7 @@ export default function Home() {
               <p className="text-sm text-gray-600 mt-4">
                 Others can scan this QR code to join the celebration!
               </p>
--              <p className="text-sm text-gray-600 mt-4">
--                Others can scan this QR code to join the celebration!
--              </p>
--              <p className="text-sm text-gray-600 mt-4">
--                Others can scan this QR code to join the celebration!
--              </p>
-+              <p className="text-sm text-gray-600 mt-4">
-+                Others can scan this QR code to join the celebration!
-+              </p>
-               <p className="text-sm font-medium text-blue-600 mt-2">
+              <p className="text-sm font-medium text-blue-600 mt-2">
                  {totalParticipants} participant{totalParticipants === 1 ? "" : "s"} so far
                </p>
             </motion.div>
