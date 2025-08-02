@@ -44,7 +44,7 @@ export default function Admin() {
   }, [isAuthenticated, subscribeToParticipants]);
 
   const loadParticipants = async () => {
-    // This function is kept for manual refresh if needed
+    // Manual refresh from Firestore
     setIsLoading(true);
     try {
       const data = await getParticipants();
