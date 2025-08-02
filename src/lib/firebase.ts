@@ -5,12 +5,12 @@ import { getAuth, signInAnonymously } from 'firebase/auth';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBvyQVDbDEuV1G422xmcj6MkBU-QU6lv9M",
-  authDomain: "game-4fd04.firebaseapp.com",
-  projectId: "game-4fd04",
-  storageBucket: "game-4fd04.firebasestorage.app",
-  messagingSenderId: "346938479519",
-  appId: "1:346938479519:web:817cb0e485a1a3d27d23aa"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
 // Initialize Firebase
